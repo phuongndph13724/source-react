@@ -1,49 +1,24 @@
 import React from "react";
-import { navigateTo } from "../../utils/navigates/navigate";
+import { Link } from "react-router-dom";
 
-const Header = ({ currentPath, setCurrentPath }) => {
+const Header = () => {
   return (
     <div className="w-full flex justify-center py-4 bg-gray-200">
       <ul className="flex w-[50%] justify-between">
         <li className="font-[600] hover:text-blue-400">
-          <button
-            onClick={() => {
-              const path = navigateTo("/");
-              setCurrentPath(path);
-            }}
-          >
-            Home
-          </button>
+          <Link to={'/'}>Home</Link>
         </li>
         <li className="font-[600] hover:text-blue-400">
-          <button
-            onClick={() => {
-              const path = navigateTo("/information");
-              setCurrentPath(path);
-            }}
-          >
-            Information
-          </button>
+          <Link to={'/news'}>New</Link>
         </li>
         <li className="font-[600] hover:text-blue-400">
-          <button
-            onClick={() => {
-              const path = navigateTo("/news");
-              setCurrentPath(path);
-            }}
-          >
-            New
-          </button>
+          <Link to={'/products'}>Product</Link>
         </li>
         <li className="font-[600] hover:text-blue-400">
-          <button
-            onClick={() => {
-              const path = navigateTo("/products");
-              setCurrentPath(path);
-            }}
-          >
-            Product
-          </button>
+          <Link to={'/information'}>Information</Link>
+        </li>
+        <li className="font-[600] hover:text-blue-400">
+          <Link to={'/admin'}>Admin</Link>
         </li>
       </ul>
     </div>

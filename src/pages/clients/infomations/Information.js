@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import SaveButton from '../../components/buttons/SaveButton'
 // import { navigateTo } from '../../utils/navigates/navigate'
-import logoBzw from '../../assets/images/logo.png'
-import InformationDisplay from '../../components/infomations/InformationDisplay'
+import logoBzw from '../../../assets/images/logo.png'
+import InformationDisplay from '../../../components/infomations/InformationDisplay'
+import SaveButton from '../../../components/buttons/SaveButton';
 
 const Information = ({setCurrentPath}) => {
 

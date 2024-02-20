@@ -1,52 +1,47 @@
-import { useState } from 'react';
-import './App.css';
-import { useEffect } from 'react';
-import Home from './pages/homes/Home';
-import Information from './pages/infomations/Information';
-import Header from './components/headers/Header';
-import Footer from './components/footers/Footer';
+import "./App.css";
+import Home from "./pages/clients/homes/Home";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import DashboardAdmin from "./pages/admins/dashboards/DashboardAdmin";
+import ProductManagement from "./pages/admins/product-managements/ProductManagement";
+import UserManagement from "./pages/admins/user-managements/UserManagement";
+import ProductList from "./pages/clients/products/ProductList";
+import DetailProduct from "./pages/clients/products/DetailProduct";
+import Notfound from "./components/notfounds/Notfound";
+import FormProduct from "./pages/admins/product-managements/FormProduct";
+import Information from "./pages/clients/infomations/Information";
+import Layout from './components/layouts/Layout';
+import LayoutAdmin from './components/layouts/LayoutAdmin';
 
 function App() {
-  const [currentPath, setCurrentPath] = useState(window.location.pathname);
-
-  const apiUrl = process.env.REACT_APP_API_URL;
-  const apiKey = process.env.REACT_APP_API_KEY;
-  console.log(apiUrl);
-  console.log(apiKey);
-
-
-  useEffect(() => {
-    const handlePopState = () => {
-      setCurrentPath(window.location.pathname);
-    };
-
-    window.addEventListener('popstate', handlePopState);
-
-    return () => {
-      window.removeEventListener('popstate', handlePopState);
-    };
-  }, []);
-
-  const renderPage = () => {
-    switch (currentPath) {
-      case '/':
-        return <Home currentPath={currentPath} setCurrentPath={setCurrentPath}/>;
-      // Thêm các trang khác ở đây
-      case '/information':
-        return <Information currentPath={currentPath} setCurrentPath={setCurrentPath}/>;
-      // Thêm các trang khác ở đây
-      default:
-        return <div>Trang không tồn tại</div>;
-    }
-  };
-
   return (
-    <div className="App h-screen flex flex-col">
-      <Header currentPath={currentPath} setCurrentPath={setCurrentPath}/>
-      <div className='h-full'>
-      {renderPage()}
-      </div>
-      <Footer />
+    <div className="App">
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+
+            <Route path="products">
+              <Route index element={<ProductList />} />
+              <Route path=':id' element={<DetailProduct />} />
+            </Route>
+
+            <Route path="information" element={<Information />} />
+            <Route path="*" element={<Notfound />} />
+
+          </Route>
+          <Route path="/admin" element={<LayoutAdmin />}>
+            <Route index element={<DashboardAdmin />} />
+
+            <Route path="product-managements">
+              <Route index element={<ProductManagement />} />
+              <Route path="add" element={<FormProduct />} />
+            </Route>
+
+            <Route path="user-managements" element={<UserManagement />} />
+            <Route path="*" element={<Notfound />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
