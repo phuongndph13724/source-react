@@ -11,6 +11,8 @@ import FormProduct from "./pages/admins/product-managements/FormProduct";
 import Information from "./pages/clients/infomations/Information";
 import Layout from './components/layouts/Layout';
 import LayoutAdmin from './components/layouts/LayoutAdmin';
+import Login from "./pages/auths/Login";
+import Register from "./pages/auths/Register";
 
 function App() {
   return (
@@ -39,6 +41,10 @@ function App() {
 
             <Route path="user-managements" element={<UserManagement />} />
             <Route path="*" element={<Notfound />} />
+          </Route>
+          <Route path='/auth/'>
+            <Route path='login' element={<Login/>} />
+            <Route path='register' element={<Register/>} />
           </Route>
         </Routes>
       </BrowserRouter>
